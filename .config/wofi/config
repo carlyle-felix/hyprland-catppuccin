@@ -1,0 +1,9 @@
+show=drun
+width=350
+columns=1
+prompt=Search
+normal_window=false
+allow_images=true
+allow_markup=true
+sort_order=alphabetical
+single_click=true

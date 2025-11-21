@@ -1,0 +1,8 @@
+background-color=#11111bE6
+font=LiberationSans 10
+border-color=#89B4FA
+progress-color=over #89B4FA
+icons=1
+markup=1
+default-timeout=10000
+border-radius=3

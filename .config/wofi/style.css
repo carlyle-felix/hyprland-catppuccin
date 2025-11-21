@@ -1,0 +1,36 @@
+#window {
+    background-color: rgba(17, 17, 27, 0.90);
+	border-radius: 5px;
+}
+
+#input {
+    background-color: rgba(17, 17, 27, 0.90);
+    border: none;
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+	border-radius: 5px;
+    color: rgba(205, 214, 244, 0.90);
+}
+
+#input:focus {
+    box-shadow: none;
+}
+
+#img {
+    margin: 3px;
+}
+
+#entry {
+    color: rgb(205, 214, 244);
+    padding: 8px 16px;
+    margin: 4px;
+	border-radius: 5px;
+}
+
+#entry:selected {
+    background-color: rgb(49, 50, 68);
+    outline: none;
+}

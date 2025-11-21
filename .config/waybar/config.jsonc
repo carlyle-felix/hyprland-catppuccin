@@ -1,0 +1,220 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    //"height": 25, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 4, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": [
+        "hyprland/workspaces",
+		//"hyprland/window",
+        "group/media"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "tray",
+        "group/hardware-monitor",
+        "idle_inhibitor",
+        "custom/pipewire",
+        "backlight",
+		"bluetooth",
+        "network",
+        "power-profiles-daemon",
+        "battery",
+        "custom/power"
+    ],
+    // Modules configuration
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "format": "{:%a %h %m, %H:%M}"
+    },
+    "group/hardware-monitor": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 500,
+            "transition-left-to-right": true,
+            "click-to-reveal": true
+        },
+        "modules": [
+            "custom/hardware",
+            "memory",
+            "cpu",
+            "temperature"
+        ]
+    },
+    "custom/hardware": {
+        "format": "󱕍",
+		"tooltip": false
+    },
+    "cpu": {
+        "format": " {usage}%",
+        "tooltip": false,
+        "on-click-right": "kitty -e htop",
+        "interval": 2
+    },
+    "memory": {
+        "format": " {}%",
+        "on-click-right": "kitty -e htop",
+        "interval": 2
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input",
+        "on-click-right": "kitty -e htop",
+        "critical-threshold": 80,
+        "interval": 2,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{icon} {temperatureC}°C",
+        "format-icons": [
+            "",
+            "",
+            ""
+        ]
+    },
+    "custom/pipewire": {
+        "tooltip": false,
+        // "max-length": 15,
+        "exec": "~/.config/waybar/scripts/pipewire.sh"
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{icon}",
+        "tooltip-format": "Brightness: {percent}%",
+        //"format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format-icons": [
+            "󰃞 ",
+            "󰃟 ",
+            "󰃠 "
+        ]
+    },
+    "battery": {
+        "states": {
+            "good": 100,
+            "warning": 30,
+            "critical": 20
+        },
+        "format": "{icon}",
+        "format-full": "{icon}",
+        "format-charging": "",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{icon} {capacity}%",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+		"interval": 2
+    },
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "󰓅",
+            "balanced": "󰾅",
+            "power-saver": "󰾆"
+        }
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "󰖩", // {essid} ({signalStrength}%)
+		"tooltip-format-wifi": "{essid}\t{ipaddr}\t{signalStrength}%",
+        "format-ethernet": "󰈀",
+        "tooltip-format": "{essid}\t{signalStrength}%",
+        "format-linked": "󰈀",
+        "format-disconnected": "󰌙",
+        "format-alt": "{ifname}: {essid}"
+    },
+    "group/media": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 500,
+            "transition-left-to-right": true,
+            "click-to-reveal": true
+        },
+        "modules": [
+            "custom/media",
+            "custom/prev",
+            "custom/play",
+            "custom/next"
+        ]
+    },
+    "custom/media": {
+        "format": "{icon} {text}",
+        "return-type": "json",
+        "max-length": 40,
+        "format-icons": {
+            "spotify": ""
+        },
+        "escape": true,
+        "exec": "$HOME/.config/waybar/scripts/mediaplayer.py" // Script in resources folder
+        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    },
+    "custom/play": {
+        "format": "󰐎",
+        "on-click": "exec playerctl play-pause"
+    },
+    "custom/next": {
+        "format": "󰒭",
+        "on-click": "exec playerctl next"
+    },
+    "custom/prev": {
+        "format": "󰒮",
+        "on-click": "exec playerctl previous"
+    },
+	"bluetooth": {
+		"format": "󰂯",
+        "format-disabled": "󰂲",
+		"format-connected": "󰂱",
+		"format-connected-battery": "󰂱",
+		// "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+		"tooltip-format": "{num_connections} connected",
+		"tooltip-format-connected": "{num_connections} connected\n\n{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias}",
+		"tooltip-format-enumerate-connected-battery": "{device_alias}\t\t{device_battery_percentage}%"
+	},
+	"custom/power": {
+    "format" : " 󰐥 ",
+        "tooltip": false,
+        "menu": "on-click",
+        "menu-file": "~/.config/waybar/menus/power_menu.xml",
+        "menu-actions": {
+            "shutdown": "systemctl poweroff",
+            "reboot": "systemctl reboot",
+            "suspend": "systemctl suspend",
+            "hibernate": "systemctl hibernate"
+        }
+    },
+	"hyprland/workspaces": {
+     "format": "{icon}",
+     "on-scroll-up": "hyprctl dispatch workspace e+1",
+     "on-scroll-down": "hyprctl dispatch workspace e-1"
+	},
+	"hyprland/window": {
+    "separate-outputs": true
+	},
+	"hyprland/submap": {
+	"format": "{name}",
+	"tooltip": true
+	}
+}

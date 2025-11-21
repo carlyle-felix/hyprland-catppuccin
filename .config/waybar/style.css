@@ -1,0 +1,433 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    padding: 0px;
+}
+
+tooltip {
+    background-color: rgb(49, 50, 68);
+}
+
+/* background colour for hover*/
+#waybar .module:hover {
+    background-color: rgb(49, 50, 68);
+}
+
+menu {
+	background-color: rgba(17, 17, 27, 0.9);
+	border-radius: 4px;
+}
+
+menuitem {
+	border-radius: 4px;
+}
+
+menuitem:hover {
+	background-color: rgb(49, 50, 68);
+}
+
+/*background-color: rgba(43, 48, 59, 0.5);*/
+window#waybar {
+    /*background-color: rgba(37, 40, 43, 0.92);*/
+	background-color: rgba(17, 17, 27, 0.9);
+    border-bottom: none;
+    color: rgb(205, 214, 244);
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.5;
+}
+
+/*
+window#waybar.empty {
+    background-color: transparent;
+}
+window#waybar.solo {
+    background-color: rgb(205, 214, 244);
+}
+*/
+
+window#waybar.termite {
+    background-color: #3F3F3F;
+}
+
+window#waybar.chromium {
+
+    background-color: #000000;
+    border: none;
+}
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -2px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    box-shadow: inset 0 -2px rgb(205, 214, 244);
+}
+
+/* you can set a style on hover for any module like this */
+#pulseaudio:hover {
+    background-color: #a37800;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+}
+
+#workspaces button.active {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(205, 214, 244);
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+#mode {
+    background-color: #64727D;
+    box-shadow: inset 0 -2px rgb(205, 214, 244);
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#mpd {
+    padding: 0 10px;
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#clock {
+    font-weight: bold;
+}
+
+#battery {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(137, 180, 250);
+}
+
+#bluetooth {
+	background-color: transparent;
+    box-shadow: inset 0 -2px rgb(137, 180, 250);
+	padding-left: 13px;
+	padding-right: 13px;
+}
+
+#bluetooth.disabled {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(243, 139, 168);
+}
+
+#bluetooth.off {
+	background-color: transparent;
+    box-shadow: inset 0 -2px rgb(243, 139, 168);
+}
+
+#bluetooth.discoverable {
+	background-color: transparent;
+    box-shadow: inset 0 -2px rgb(166, 227, 161);
+}
+
+#bluetooth.connected {
+	background-color: transparent;
+    box-shadow: inset 0 -2px rgb(137, 180, 250);
+}
+
+#custom-pipewire {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(137, 180, 250);
+    padding: 3px;
+}
+
+#custom-power {
+    background-color: transparent;
+    margin-right: 2px;
+}
+
+#custom-hardware {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(148, 226, 213);
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+#battery.charging, #battery.plugged {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(166, 227, 161);
+}
+
+@keyframes blink {
+    to {
+        background-color: rgb(205, 214, 244);
+        color: #000000;
+    }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(243, 139, 168);
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#power-profiles-daemon {
+    padding-right: 10px;
+}
+
+#power-profiles-daemon.performance {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(243, 139, 168);
+}
+
+#power-profiles-daemon.balanced {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(137, 180, 250);
+}
+
+#power-profiles-daemon.power-saver {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(166, 227, 161);
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#cpu {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(148, 226, 213);
+}
+
+#memory {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(148, 226, 213);
+}
+
+#disk {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(148, 226, 213);
+}
+
+#backlight {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(137, 180, 250);
+}
+
+#network {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(137, 180, 250);
+}
+
+#network.disconnected {
+    background-color: transparent;
+    box-shadow: inset 0 -2px #f53c3c;
+}
+
+#pulseaudio {
+    background-color: transparent;
+    box-shadow: inset 0 -2px #f1c40f;
+}
+
+#pulseaudio.muted {
+    background-color: transparent;
+    box-shadow: inset 0 -2px #90b1b1;
+}
+
+#wireplumber {
+    background-color: transparent;
+    box-shadow: inset 0 -2px #fff0f5;
+}
+
+#wireplumber.muted {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(243, 139, 168);
+}
+
+#custom-media:hover {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(205, 214, 244);
+}
+
+#custom-prev {
+    margin: 4px;
+    padding: 4px;
+}
+
+#custom-prev:hover {
+    box-shadow: inset 0 -2px rgb(205, 214, 244);
+}
+
+#custom-play {
+    margin: 4px;
+    padding: 4px;
+}
+
+#custom-play:hover {
+    box-shadow: inset 0 -2px rgb(205, 214, 244);
+}
+
+#custom-next {
+    margin: 4px;
+    padding: 4px;
+}
+
+#custom-next:hover {
+    box-shadow: inset 0 -2px rgb(205, 214, 244);  
+}
+#custom-media.custom-spotify {
+    background-color: transparent;
+}
+
+#custom-media.custom-vlc {
+    background-color: transparent;
+}
+
+#temperature {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(148, 226, 213);
+}
+
+#temperature.critical {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(243, 139, 168);
+}
+
+#tray {
+    margin-right: 10px;
+    background-color: transparent;
+    box-shadow: inset 0 -2px #86c2e2;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(243, 139, 168);
+}
+
+#idle_inhibitor {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(137, 180, 250);
+    font-size: 17px;
+}
+
+#idle_inhibitor.activated {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(243, 139, 168);
+
+}
+
+#mpd {
+    background-color: transparent;
+    box-shadow: inset 0 -2px #66cc99;
+}
+
+#mpd.disconnected {
+    background-color: transparent;
+    box-shadow: inset 0 -2px rgb(243, 139, 168);
+}
+
+#mpd.stopped {
+    background-color: transparent;
+    box-shadow: inset 0 -2px #90b1b1;
+}
+
+#mpd.paused {
+    background-color: transparent;
+    box-shadow: inset 0 -2px #51a37a;
+}
+
+#language {
+    background: #00b093;
+    color: #740864;
+    padding: 0 5px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state {
+    background: #97e1ad;
+    color: #000000;
+    padding: 0 0px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state > label {
+    padding: 0 5px;
+}
+
+#keyboard-state > label.locked {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad.empty {
+	background-color: transparent;
+}
+
+#privacy {
+    padding: 0;
+}
+
+#privacy-item {
+    padding: 0 5px;
+    color: white;
+}
+
+#privacy-item.screenshare {
+    background-color: #cf5700;
+}
+
+#privacy-item.audio-in {
+    background-color: #1ca000;
+}
+
+#privacy-item.audio-out {
+    background-color: #0069d4;
+}
