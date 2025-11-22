@@ -2,6 +2,26 @@
 
 iDIR="$HOME/.config/mako/icons"
 
+main() {
+
+	arg=$1
+	# Execute accordingly
+	case ${arg} in
+		"--get")
+			get_backlight
+			;;
+		"--inc")
+			inc_backlight
+			;;
+		"--dec")
+			dec_backlight
+			;;
+		*)
+			get_backlight
+			;;
+	esac
+}
+
 # Get brightness
 get_backlight() {
 	max=$(brightnessctl m)
@@ -29,7 +49,7 @@ get_icon() {
 
 # Notify
 notify_user() {
-	notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$icon" "Brightness : $(get_backlight)"
+	notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$icon" "    Brightness: $(get_backlight)%"
 }
 
 # Increase brightness
@@ -52,3 +72,5 @@ elif [[ "$1" == "--dec" ]]; then
 else
 	get_backlight
 fi
+
+main $@
