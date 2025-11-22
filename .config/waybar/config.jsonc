@@ -91,6 +91,9 @@
         "return-type": "json",
         "min-length": 2,
         "exec": "~/.config/waybar/scripts/pipewire.sh",
+        "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
         "format-icons": {
             "mute": "",
             "low": "",
@@ -194,6 +197,7 @@
         "format-disabled": "󰂲",
 		"format-connected": "󰂱",
 		"format-connected-battery": "󰂱",
+        "on-click": "exec ~/.config/waybar/scripts/bluetooth.sh",
 		// "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
 		"tooltip-format": "{num_connections} connected",
 		"tooltip-format-connected": "{num_connections} connected\n\n{device_enumerate}",
