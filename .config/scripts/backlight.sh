@@ -11,10 +11,10 @@ main() {
 			get_backlight
 			;;
 		"--inc")
-			inc_backlight
+			inc_backlight "$2"
 			;;
 		"--dec")
-			dec_backlight
+			dec_backlight "$2"
 			;;
 		*)
 			get_backlight
@@ -54,12 +54,12 @@ notify_user() {
 
 # Increase brightness
 inc_backlight() {
-	brightnessctl s +5% && get_icon && notify_user
+	brightnessctl s +${1}% && get_icon && notify_user
 }
 
 # Decrease brightness
 dec_backlight() {
-	brightnessctl s 5%- && get_icon && notify_user
+	brightnessctl s ${1}%- && get_icon && notify_user
 }
 
 # Execute accordingly

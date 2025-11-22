@@ -91,9 +91,9 @@
         "return-type": "json",
         "min-length": 2,
         "exec": "~/.config/waybar/scripts/pipewire.sh",
-        "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
-        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
-        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-scroll-up": "exec ~/.config/scripts/volume.sh --inc 1",
+        "on-scroll-down": "exec ~/.config/scripts/volume.sh --dec 1",
+        "on-click": "exec ~/.config/scripts/volume.sh --toggle",
         "format-icons": {
             "mute": "",
             "low": "",
@@ -105,6 +105,8 @@
         // "device": "acpi_video1",
         "format": "{icon}",
         "tooltip-format": "Brightness: {percent}%",
+        "on-scroll-up": "exec ~/.config/scripts/backlight.sh --inc 1",
+        "on-scroll-down": "exec ~/.config/scripts/backlight.sh --dec 1",
         //"format-icons": ["", "", "", "", "", "", "", "", ""]
         "format-icons": [
             "󰃞 ",
@@ -153,7 +155,8 @@
         "tooltip-format": "{essid}\t{signalStrength}%",
         "format-linked": "󰈀",
         "format-disconnected": "󰌙",
-        "format-alt": "{ifname}: {essid}"
+        "format-alt": "{ifname}: {essid}",
+        "on-click-right": "kitty -e nmtui"
     },
     "group/media": {
         "orientation": "horizontal",
@@ -197,7 +200,8 @@
         "format-disabled": "󰂲",
 		"format-connected": "󰂱",
 		"format-connected-battery": "󰂱",
-        "on-click": "exec ~/.config/waybar/scripts/bluetooth.sh",
+        "on-click": "exec ~/.config/scripts/bluetooth.sh",
+        "on-click-right": "kitty -e bluetoothctl",
 		// "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
 		"tooltip-format": "{num_connections} connected",
 		"tooltip-format-connected": "{num_connections} connected\n\n{device_enumerate}",

@@ -16,7 +16,7 @@ main() {
 			if [ $? -eq 1 ]; then	
 				notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/volume-mute.png" "    Muted"
 			else
-				inc_volume
+				inc_volume "$2"
 			fi
 			;;
 		"--dec")
@@ -24,7 +24,7 @@ main() {
 			if [ $? -eq 1 ]; then	
 				notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/volume-mute.png" "    Muted"
 			else
-				dec_volume
+				dec_volume "$2"
 			fi
 			;;
 		"--toggle")
@@ -73,12 +73,12 @@ get_mute_state() {
 
 # Increase Volume
 inc_volume() {
-	wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+ && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/volume-up.png" "    Volume: $(get_volume)%"
+	wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ ${1}%+ && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/volume-up.png" "    Volume: $(get_volume)%"
 }
 
 # Decrease Volume
 dec_volume() {
-	wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/volume-down.png" "    Volume: $(get_volume)%"
+	wpctl set-volume @DEFAULT_AUDIO_SINK@ ${1}%- && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/volume-down.png" "    Volume: $(get_volume)%"
 }
 
 # Toggle Mute
