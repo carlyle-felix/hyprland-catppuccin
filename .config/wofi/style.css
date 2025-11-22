@@ -1,10 +1,12 @@
+@import '.config/palette/catppuccin-mocha.css';
+
 #window {
-    background-color: rgba(17, 17, 27, 0.90);
+    background-color: @background;
 	border-radius: 5px;
 }
 
 #input {
-    background-color: rgba(17, 17, 27, 0.90);
+    background-color: @background;
     border: none;
     padding: 0;
     margin-top: 10px;
@@ -12,7 +14,7 @@
     margin-left: 10px;
     margin-right: 10px;
 	border-radius: 5px;
-    color: rgba(205, 214, 244, 0.90);
+    color: @text;
 }
 
 #input:focus {
@@ -24,13 +26,14 @@
 }
 
 #entry {
-    color: rgb(205, 214, 244);
+    color: @text;
     padding: 8px 16px;
     margin: 4px;
 	border-radius: 5px;
 }
 
 #entry:selected {
-    background-color: rgb(49, 50, 68);
+    background-color: @highlight;
+    color: @text;
     outline: none;
 }

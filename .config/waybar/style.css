@@ -1,4 +1,4 @@
-@import 'color.css';
+@import '../palette/catppuccin-mocha.css';
 
 * {
     /* `otf-font-awesome` is required to be installed for icons */
