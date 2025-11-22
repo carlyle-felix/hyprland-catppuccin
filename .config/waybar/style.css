@@ -1,21 +1,31 @@
+@import 'color.css';
+
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     font-size: 14px;
     padding: 0px;
+
+}
+
+@keyframes blink {
+    to {
+        background-color: @red;
+        color: @text;
+    }
 }
 
 tooltip {
-    background-color: rgb(49, 50, 68);
+    background-color: @highlight;
 }
 
 /* background colour for hover*/
 #waybar .module:hover {
-    background-color: rgb(49, 50, 68);
+    background-color: @highlight;
 }
 
 menu {
-	background-color: rgba(17, 17, 27, 0.9);
+	background-color: @background;
 	border-radius: 4px;
 }
 
@@ -24,40 +34,15 @@ menuitem {
 }
 
 menuitem:hover {
-	background-color: rgb(49, 50, 68);
+	background-color: @highlight;
 }
 
-/*background-color: rgba(43, 48, 59, 0.5);*/
 window#waybar {
-    /*background-color: rgba(37, 40, 43, 0.92);*/
-	background-color: rgba(17, 17, 27, 0.9);
+	background-color: @background;
     border-bottom: none;
-    color: rgb(205, 214, 244);
+    color: @text;
     transition-property: background-color;
     transition-duration: .5s;
-}
-
-window#waybar.hidden {
-    opacity: 0.5;
-}
-
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: rgb(205, 214, 244);
-}
-*/
-
-window#waybar.termite {
-    background-color: #3F3F3F;
-}
-
-window#waybar.chromium {
-
-    background-color: #000000;
-    border: none;
 }
 
 button {
@@ -70,12 +55,7 @@ button {
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
-    box-shadow: inset 0 -2px rgb(205, 214, 244);
-}
-
-/* you can set a style on hover for any module like this */
-#pulseaudio:hover {
-    background-color: #a37800;
+    box-shadow: inset 0 -2px @rosewater;
 }
 
 #workspaces button {
@@ -85,16 +65,17 @@ button:hover {
 
 #workspaces button.active {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(205, 214, 244);
+    box-shadow: inset 0 -2px @rosewater;
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
-}
-
-#mode {
-    background-color: #64727D;
-    box-shadow: inset 0 -2px rgb(205, 214, 244);
+    background-color: transparent;
+    box-shadow: inset 0 -2px @red;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: 6;
+    animation-direction: alternate;
 }
 
 #clock,
@@ -105,11 +86,10 @@ button:hover {
 #temperature,
 #backlight,
 #network,
-#pulseaudio,
 #wireplumber,
 #custom-media,
+#custom-pipewire,
 #tray,
-#mode,
 #idle_inhibitor,
 #scratchpad,
 #power-profiles-daemon,
@@ -138,40 +118,54 @@ button:hover {
 
 #battery {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(137, 180, 250);
+    box-shadow: inset 0 -2px @blue;
 }
 
 #bluetooth {
 	background-color: transparent;
-    box-shadow: inset 0 -2px rgb(137, 180, 250);
+    box-shadow: inset 0 -2px @blue;
 	padding-left: 13px;
 	padding-right: 13px;
 }
 
 #bluetooth.disabled {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(243, 139, 168);
+    box-shadow: inset 0 -2px @red;
 }
 
 #bluetooth.off {
 	background-color: transparent;
-    box-shadow: inset 0 -2px rgb(243, 139, 168);
+    box-shadow: inset 0 -2px @red;
 }
 
 #bluetooth.discoverable {
 	background-color: transparent;
-    box-shadow: inset 0 -2px rgb(166, 227, 161);
+    box-shadow: inset 0 -2px @green;
 }
 
 #bluetooth.connected {
 	background-color: transparent;
-    box-shadow: inset 0 -2px rgb(137, 180, 250);
+    box-shadow: inset 0 -2px @blue;
 }
 
-#custom-pipewire {
+#custom-pipewire.mute {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(137, 180, 250);
-    padding: 3px;
+    box-shadow: inset 0 -2px @red;
+}
+
+#custom-pipewire.low {
+    background-color: transparent;
+    box-shadow: inset 0 -2px @blue;
+}
+
+#custom-pipewire.medium {
+    background-color: transparent;
+    box-shadow: inset 0 -2px @blue;
+}
+
+#custom-pipewire.high {
+    background-color: transparent;
+    box-shadow: inset 0 -2px @blue;
 }
 
 #custom-power {
@@ -181,27 +175,20 @@ button:hover {
 
 #custom-hardware {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(148, 226, 213);
+    box-shadow: inset 0 -2px @teal;
     padding-right: 5px;
     padding-left: 5px;
 }
 
 #battery.charging, #battery.plugged {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(166, 227, 161);
-}
-
-@keyframes blink {
-    to {
-        background-color: rgb(205, 214, 244);
-        color: #000000;
-    }
+    box-shadow: inset 0 -2px @green;
 }
 
 /* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(243, 139, 168);
+    box-shadow: inset 0 -2px @red;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: steps(12);
@@ -215,17 +202,17 @@ button:hover {
 
 #power-profiles-daemon.performance {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(243, 139, 168);
+    box-shadow: inset 0 -2px @red;
 }
 
 #power-profiles-daemon.balanced {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(137, 180, 250);
+    box-shadow: inset 0 -2px @blue;
 }
 
 #power-profiles-daemon.power-saver {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(166, 227, 161);
+    box-shadow: inset 0 -2px @green;
 }
 
 label:focus {
@@ -234,57 +221,36 @@ label:focus {
 
 #cpu {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(148, 226, 213);
+    box-shadow: inset 0 -2px @teal;
 }
 
 #memory {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(148, 226, 213);
+    box-shadow: inset 0 -2px @teal;
 }
 
 #disk {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(148, 226, 213);
+    box-shadow: inset 0 -2px @teal;
 }
 
 #backlight {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(137, 180, 250);
+    box-shadow: inset 0 -2px @blue;
 }
 
 #network {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(137, 180, 250);
+    box-shadow: inset 0 -2px @blue;
 }
 
 #network.disconnected {
     background-color: transparent;
-    box-shadow: inset 0 -2px #f53c3c;
-}
-
-#pulseaudio {
-    background-color: transparent;
-    box-shadow: inset 0 -2px #f1c40f;
-}
-
-#pulseaudio.muted {
-    background-color: transparent;
-    box-shadow: inset 0 -2px #90b1b1;
-}
-
-#wireplumber {
-    background-color: transparent;
-    box-shadow: inset 0 -2px #fff0f5;
-}
-
-#wireplumber.muted {
-    background-color: transparent;
-    box-shadow: inset 0 -2px rgb(243, 139, 168);
+    box-shadow: inset 0 -2px @red;
 }
 
 #custom-media:hover {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(205, 214, 244);
 }
 
 #custom-prev {
@@ -293,7 +259,7 @@ label:focus {
 }
 
 #custom-prev:hover {
-    box-shadow: inset 0 -2px rgb(205, 214, 244);
+    box-shadow: inset 0 -2px @text;
 }
 
 #custom-play {
@@ -302,7 +268,7 @@ label:focus {
 }
 
 #custom-play:hover {
-    box-shadow: inset 0 -2px rgb(205, 214, 244);
+    box-shadow: inset 0 -2px @text;
 }
 
 #custom-next {
@@ -311,8 +277,9 @@ label:focus {
 }
 
 #custom-next:hover {
-    box-shadow: inset 0 -2px rgb(205, 214, 244);  
+    box-shadow: inset 0 -2px @text;  
 }
+
 #custom-media.custom-spotify {
     background-color: transparent;
 }
@@ -323,18 +290,18 @@ label:focus {
 
 #temperature {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(148, 226, 213);
+    box-shadow: inset 0 -2px @teal;
 }
 
 #temperature.critical {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(243, 139, 168);
+    box-shadow: inset 0 -2px @red;
 }
 
 #tray {
     margin-right: 10px;
     background-color: transparent;
-    box-shadow: inset 0 -2px #86c2e2;
+    box-shadow: inset 0 -2px @peach;
 }
 
 #tray > .passive {
@@ -344,52 +311,51 @@ label:focus {
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(243, 139, 168);
+    box-shadow: inset 0 -2px @red;
 }
 
 #idle_inhibitor {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(137, 180, 250);
+    box-shadow: inset 0 -2px @blue;
     font-size: 17px;
 }
 
 #idle_inhibitor.activated {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(243, 139, 168);
+    box-shadow: inset 0 -2px @red;
 
 }
 
 #mpd {
     background-color: transparent;
-    box-shadow: inset 0 -2px #66cc99;
 }
 
 #mpd.disconnected {
     background-color: transparent;
-    box-shadow: inset 0 -2px rgb(243, 139, 168);
+    box-shadow: inset 0 -2px @red;
 }
 
 #mpd.stopped {
     background-color: transparent;
-    box-shadow: inset 0 -2px #90b1b1;
+    box-shadow: inset 0 -2px @red;
 }
 
 #mpd.paused {
     background-color: transparent;
-    box-shadow: inset 0 -2px #51a37a;
+    box-shadow: inset 0 -2px @red;
 }
 
 #language {
-    background: #00b093;
-    color: #740864;
+    box-shadow: inset 0 -2px @blue;
+    color: @text;
     padding: 0 5px;
     margin: 0 5px;
     min-width: 16px;
 }
 
 #keyboard-state {
-    background: #97e1ad;
-    color: #000000;
+    box-shadow: inset 0 -2px @blue;
+    color: @text;
     padding: 0 0px;
     margin: 0 5px;
     min-width: 16px;
@@ -400,15 +366,15 @@ label:focus {
 }
 
 #keyboard-state > label.locked {
-    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 -2px @green;
 }
 
 #scratchpad {
-    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 -2px @flamingo;
 }
 
 #scratchpad.empty {
-	background-color: transparent;
+	box-shadow: inset 0 -2px @text;
 }
 
 #privacy {
@@ -417,17 +383,17 @@ label:focus {
 
 #privacy-item {
     padding: 0 5px;
-    color: white;
+    color: @text;
 }
 
 #privacy-item.screenshare {
-    background-color: #cf5700;
+    background-color: @red;
 }
 
 #privacy-item.audio-in {
-    background-color: #1ca000;
+    background-color: @green;
 }
 
 #privacy-item.audio-out {
-    background-color: #0069d4;
+    background-color: @red;
 }

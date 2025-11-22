@@ -87,9 +87,16 @@
         ]
     },
     "custom/pipewire": {
-        "tooltip": false,
-        // "max-length": 15,
-        "exec": "~/.config/waybar/scripts/pipewire.sh"
+        "format": "{icon}",
+        "return-type": "json",
+        "min-length": 2,
+        "exec": "~/.config/waybar/scripts/pipewire.sh",
+        "format-icons": {
+            "mute": "",
+            "low": "",
+            "medium": "",
+            "high": ""
+        }
     },
     "backlight": {
         // "device": "acpi_video1",
