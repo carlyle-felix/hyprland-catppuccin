@@ -15,7 +15,7 @@ xdg-user-dirs-update
 xdg-user-dirs-gtk-update
 
 # Make scripts executable
-chmod +x .config/hypr/scripts/*
+chmod +x .config/scripts/*
 chmod +x .config/waybar/scripts/*
 popd
 
