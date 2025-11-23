@@ -21,6 +21,7 @@
         "custom/pipewire",
         "backlight",
 		"bluetooth",
+        "custom/wireguard",
         "network",
         "power-profiles-daemon",
         "battery",
@@ -30,8 +31,8 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "activated": "󰛐",
+            "deactivated": "󰛑"
         }
     },
     "tray": {
@@ -147,10 +148,22 @@
             "power-saver": "󰾆"
         }
     },
+    "custom/wireguard": {
+        "format": "{icon}",
+        "return-type": "json",
+        "tooltip": true,
+        "exec": "~/.config/waybar/scripts/wireguard-info.sh",
+        "on-click": "exec ~/.config/scripts/wireguard.sh toggle",
+        "format-icons": {
+            "activated": "󰕥",
+            "deactivated": "󰦞",
+            "none": "󰫜"
+        }
+    },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "󰖩", // {essid} ({signalStrength}%)
-		"tooltip-format-wifi": "{essid}\t{ipaddr}\t{signalStrength}%",
+		"tooltip-format-wifi": " SSID:\t{essid} \n Local IP:\t{ipaddr} \n Signal:\t{signalStrength}% ",
         "format-ethernet": "󰈀",
         "tooltip-format": "{essid}\t{signalStrength}%",
         "format-linked": "󰈀",

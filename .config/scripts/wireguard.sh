@@ -1,19 +1,18 @@
 #!/bin/bash
 
-# SETUP
+# SET TUNNEL
 TUNNEL="wg0"
 
 main()
 {
     case $1 in
+        # query the tunnel state
         query)
             query_state
-            if [ $? -eq 0 ]; then
-                echo "ON"
-            else
-                echo "OFF"
-            fi
+            echo "$?"
         ;;
+
+        # toggle the state
         toggle)
             toggle_state
         ;;
@@ -22,6 +21,11 @@ main()
 
 query_state()
 {
+    nmcli connection show $TUNNEL &> /dev/null
+    if [ $? -ne 0 ]; then   
+        return 2    # non existant state
+    fi
+
     ip l | grep "${TUNNEL}" &> /dev/null
     return "$?"
 }
