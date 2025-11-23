@@ -49,7 +49,7 @@ get_icon() {
 
 # Notify
 notify_user() {
-	notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$icon" "    Brightness: $(get_backlight)%"
+	notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$icon" "Brightness: $(get_backlight)%"
 }
 
 # Increase brightness
