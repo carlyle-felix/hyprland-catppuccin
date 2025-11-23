@@ -2,6 +2,24 @@
 
 iDIR="$HOME/.config/mako/icons"
 
+# Set delay 
+LOCK_FILE="/tmp/hyrpland_volume.lock"
+DELAY=20
+
+# Check last run
+if [ -f "$LOCK_FILE" ]; then
+    PREV=$(cat $LOCK_FILE)
+    TIME=$(date +%s%3N)
+    DIFF=$((TIME - PREV))
+
+    if [ $DIFF -lt $DELAY ]; then
+        exit 1
+    fi
+fi
+
+# Update time
+echo "$TIME" > "$LOCK_FILE"
+
 main() {
 
 	arg=$1
