@@ -1,6 +1,4 @@
-#!/usr/bin/env bash
-
-iDIR="$HOME/.config/mako/icons"
+#!/bin/bash
 
 main() {
 
@@ -34,22 +32,18 @@ get_backlight() {
 # Get icons
 get_icon() {
 	current="$(get_backlight)"
-	if [[ ("$current" -ge "0") && ("$current" -le "19200") ]]; then
-		icon="$iDIR/brightness-20.png"
-	elif [[ ("$current" -ge "19200") && ("$current" -le "38400") ]]; then
-		icon="$iDIR/brightness-40.png"
-	elif [[ ("$current" -ge "38400") && ("$current" -le "57600") ]]; then
-		icon="$iDIR/brightness-60.png"
-	elif [[ ("$current" -ge "57600") && ("$current" -le "76800") ]]; then
-		icon="$iDIR/brightness-80.png"
-	elif [[ ("$current" -ge "76800") && ("$current" -le "96000") ]]; then
-		icon="$iDIR/brightness-100.png"
+	if [ "$current" -lt "33" ]; then
+		icon="󰃞"
+	elif [ "$current" -lt "66" ]; then
+		icon="󰃟"
+	elif [ "$current" -le "100" ]; then
+		icon="󰃠"
 	fi
 }
 
 # Notify
 notify_user() {
-	notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$icon" "Brightness: $(get_backlight)%"
+	notify-send -h string:x-canonical-private-synchronous:sys-notify -u low "$icon Brightness: $(get_backlight)%" -h int:value:$(get_backlight)
 }
 
 # Increase brightness

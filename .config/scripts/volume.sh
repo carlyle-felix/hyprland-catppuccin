@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
-iDIR="$HOME/.config/mako/icons"
-
 # Set delay 
 LOCK_FILE="/tmp/hyrpland_volume.lock"
-DELAY=20
+DELAY=30
 
 # Check last run
 if [ -f "$LOCK_FILE" ]; then
@@ -32,7 +30,7 @@ main() {
 		"--inc")
 			get_mute_state "1"
 			if [ $? -eq 1 ]; then	
-				notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/volume-mute.png" "Muted"
+				notify-send -h string:x-canonical-private-synchronous:sys-notify -u low " Muted"
 			else
 				inc_volume "$2"
 			fi
@@ -40,7 +38,7 @@ main() {
 		"--dec")
 			get_mute_state "1"
 			if [ $? -eq 1 ]; then	
-				notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/volume-mute.png" "Muted"
+				notify-send -h string:x-canonical-private-synchronous:sys-notify -u low " Muted"
 			else
 				dec_volume "$2"
 			fi
@@ -89,23 +87,37 @@ get_mute_state() {
 	fi
 }
 
+# Get icons
+get_icon() {
+	current="$(get_volume)"
+	if [ "$current" -lt "33" ]; then
+		icon=""
+	elif [ "$current" -lt "66" ]; then
+		icon=""
+	elif [ "$current" -le "100" ]; then
+		icon=""
+	fi
+}
+
 # Increase Volume
 inc_volume() {
-	wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ ${1}%+ && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/volume-up.png" "Volume: $(get_volume)%"
+	get_icon
+	wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ ${1}%+ && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low "$icon Volume: $(get_volume)%" -h int:value:$(get_volume)
 }
 
 # Decrease Volume
 dec_volume() {
-	wpctl set-volume @DEFAULT_AUDIO_SINK@ ${1}%- && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/volume-down.png" "Volume: $(get_volume)%"
+	get_icon
+	wpctl set-volume @DEFAULT_AUDIO_SINK@ ${1}%- && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low "$icon Volume: $(get_volume)%" -h int:value:$(get_volume)
 }
 
 # Toggle Mute
 toggle_mute() {
 	get_mute_state "1"
 	if [ $? -eq 0 ]; then
-		wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/volume-mute.png" "Mute"
+		wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low " Mute"
 	else
-		wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/volume-unmute.png" "Unmute"
+		wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low " Unmute"
 	fi
 }
 
@@ -113,9 +125,9 @@ toggle_mute() {
 toggle_mic() {
 	get_mute_state "0"
 	if [ $? -eq 0 ]; then
-		wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/microphone-mute.png" "Microphone: OFF"
+		wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && notify-send -h string:x-canonical-private-synchronous:sys-notify -u critical "󰍭 Mute"
 	else
-		wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/microphone.png" "Microphone: ON"
+		wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && notify-send -h string:x-canonical-private-synchronous:sys-notify -u critical "󰍬 Unmute"
 	fi
 }
 

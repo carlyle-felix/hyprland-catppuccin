@@ -27,9 +27,9 @@ while snore $DELAY; do
         else
             VOLUME=$((10#${BASH_REMATCH[1]}${BASH_REMATCH[2]}))
 
-            if [[ $VOLUME -gt 65 ]]; then
+            if [[ $VOLUME -gt 66 ]]; then
                 CLASS="high"
-            elif [[ $VOLUME -gt 35 ]]; then
+            elif [[ $VOLUME -gt 33 ]]; then
                 CLASS="medium"
             elif [[ $VOLUME -ge 0 ]]; then
                 CLASS="low"
