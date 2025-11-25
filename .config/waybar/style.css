@@ -90,6 +90,7 @@ button:hover {
 #custom-media,
 #custom-pipewire,
 #custom-wireguard,
+#custom-microphone,
 #tray,
 #idle_inhibitor,
 #scratchpad,
@@ -167,6 +168,16 @@ button:hover {
 #custom-pipewire.high {
     background-color: transparent;
     box-shadow: inset 0 -2px @blue;
+}
+
+#custom-microphone.unmute {
+    background-color: transparent;
+    color: @red;
+    animation-name: blink;
+    animation-duration: 0.45s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 #custom-wireguard.activated {

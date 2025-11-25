@@ -49,9 +49,6 @@ main() {
 		"--toggle-mic")
 			toggle_mic
 			;;
-		*)
-			get_volume
-			;;
 	esac
 }
 

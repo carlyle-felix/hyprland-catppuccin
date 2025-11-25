@@ -18,6 +18,7 @@
         "tray",
         "group/hardware-monitor",
         "idle_inhibitor",
+        "custom/microphone",
         "custom/pipewire",
         "backlight",
 		"bluetooth",
@@ -100,6 +101,16 @@
             "low": "",
             "medium": "",
             "high": ""
+        }
+    },
+    "custom/microphone": {
+        "format": "{icon}",
+        "return-type": "json",
+        "toolyip": true,
+        "exec": "~/.config/waybar/scripts/microphone.sh",
+        "format-icons": {
+            "mute": "",     /*don't display when muted*/
+            "unmute": "󰍬"
         }
     },
     "backlight": {
