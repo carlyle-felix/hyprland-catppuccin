@@ -49,12 +49,6 @@ main() {
 		"--toggle-mic")
 			toggle_mic
 			;;
-		"--mic-inc")
-			inc_mic_volume
-			;;
-		"--mic-dec")
-			dec_mic_volume
-			;;
 		*)
 			get_volume
 			;;
