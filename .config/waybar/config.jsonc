@@ -106,7 +106,7 @@
     "custom/microphone": {
         "format": "{icon}",
         "return-type": "json",
-        "toolyip": true,
+        "tooltip": true,
         "exec": "~/.config/waybar/scripts/microphone.sh",
         "format-icons": {
             "mute": "",     /*don't display when muted*/
