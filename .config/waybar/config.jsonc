@@ -174,7 +174,7 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "󰖩", // {essid} ({signalStrength}%)
-		"tooltip-format-wifi": " SSID:\t{essid} \n Local IP:\t{ipaddr} \n Signal:\t{signalStrength}% ",
+		"tooltip-format-wifi": " SSID:\t\t{essid} \n Local IP:\t{ipaddr} \n Signal:\t\t{signalStrength}% ",
         "format-ethernet": "󰈀",
         "tooltip-format": "{essid}\t{signalStrength}%",
         "format-linked": "󰈀",
