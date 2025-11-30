@@ -2,7 +2,6 @@
 
 # Copy directories
 cp -r .config /home/${USER}/
-sudo cp -r Pictures /home/${USER}/
 sudo cp -r usr /
 
 # Make executable
@@ -25,6 +24,7 @@ pushd papirus-folders
 sudo cp -r src/* /usr/share/icons/Papirus  
 curl -LO https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-folders/master/papirus-folders && chmod +x ./papirus-folders
 ./papirus-folders -C cat-mocha-blue --theme Papirus-Dark
+
 # Cleanup
 popd && rm -rf papirus-folders
 
